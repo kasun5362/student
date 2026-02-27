@@ -70,6 +70,12 @@
 
 </head>
 <body>
+    @if (session("success"))
+            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                {{ session("success") }}
+            </div>
+
+       @endif
     <div class="main">
        <table>
             <tr>
@@ -85,8 +91,19 @@
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->reg }}</td>
                     <td>{{ $student->email }}</td>
-                    <td><button>Edit</button></td>
-                    <td><button>Delete</button></td>
+                    <td>
+                        <form action="/updateStudent/{{ $student->id }}" method="GET">
+                            @csrf
+                            <button>Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/deleteStudent/{{ $student->id }}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <button>Delete</button>
+                        </form>
+                    </td>
                 </tr>
              @endforeach
 
