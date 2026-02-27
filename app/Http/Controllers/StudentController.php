@@ -38,4 +38,5 @@ class StudentController extends Controller
         return redirect("/addStudent");
     }
 
+
 }
