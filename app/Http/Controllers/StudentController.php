@@ -35,7 +35,40 @@ class StudentController extends Controller
 
         $student->save();
 
-        return redirect("/addStudent");
+        return redirect("/addStudent")->with("success","Student add success");
+    }
+
+
+    function deleteStudent($id){
+        $student = Student::findOrFail($id);
+        $student->delete();
+        return redirect()->back()->with("success","Student delete success");
+    }
+
+    function showUpdateStudent($id){
+        $student = Student::findOrFail($id);
+        return view("UpdateStudent",compact("student"));
+    }
+
+    function putupdateStudent(Request $req, $id){
+        // Validate
+        $req->validate([
+            "name" => "required | string | max:255",
+            "reg" => "required",
+            "email" => "required | string",
+            "password" => "required",
+        ]);
+
+        $student = Student::findOrFail($id);
+
+        $student->name = $req->name;
+        $student->reg = $req->reg;
+        $student->email = $req->email;
+        $student->password = $req->password;
+
+        $student->save();
+
+        return redirect("/student")->with("success","Student update success");
     }
 
 }

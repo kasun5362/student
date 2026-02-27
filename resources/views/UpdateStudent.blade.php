@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +7,7 @@
     <title>Document</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -17,7 +17,6 @@
             background-color: rgb(248, 248, 248);
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center
         }
@@ -49,46 +48,26 @@
             width: 150px;
             background-color: orange;
             border: none;
-            margin-top: 1em;
+            margin-top: 1em
         }
 
-        .successMessage {
-            background-color: hsla(120, 100%, 50%, 0.61);
-            width: 100%;
-            position: fixed;
-            top: 0;
-            padding: 0.5em
-
-        }
-
-        .successMessage p {
-            color: green
-        }
     </style>
 
 </head>
-
 <body>
 
     <div class="main">
-
-        @if (session('success'))
-            <div class="successMessage">
-                <p>{{ session('success') }}</p>
-            </div>
-        @endif
-
-        <form action="/postStudent" method="POST">
+        <form action="/putUpdateStudent/{{ $student->id }}" method="POST">
             @csrf
-            <h1>Add Student</h1>
-            <input type="text" placeholder="Full Name" name="name">
-            <input type="text" placeholder="Registration" name="reg">
-            <input type="email" placeholder="Email" name="email">
+            @method("PUT")
+            <h1>Update Student</h1>
+            <input type="text" placeholder="Full Name" name="name" value="{{ $student->name }}">
+            <input type="text" placeholder="Registration" name="reg" value="{{ $student->reg }}" >
+            <input type="email" placeholder="Email" name="email" value="{{ $student->email }}">
             <input type="password" placeholder="password" name="password">
-            <button>Add Student</button>
+            <button>Update Student</button>
         </form>
 
     </div>
 </body>
-
 </html>
