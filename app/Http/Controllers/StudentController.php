@@ -65,7 +65,7 @@ class StudentController extends Controller
         $student->reg = $req->reg;
         $student->email = $req->email;
         $student->password = $req->password;
-
+        // TEST
         $student->save();
 
         return redirect("/student")->with("success","Student update success");
