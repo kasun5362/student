@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Student;
 
+
 class StudentController extends Controller
 {
     function index(){
@@ -38,5 +39,35 @@ class StudentController extends Controller
         return redirect("/addStudent");
     }
 
+
+    function deleteStudent($id){
+       $student = Student::findOrFail($id);
+    //    $student = Student::find($id);
+        $student->delete();
+        return redirect()->back();
+
+        // return redirect()->back()->with("success","Delete Success");
+    }
+
+
+    function showEditPage($id){
+        $student = Student::findOrFail($id);
+
+        return view("UpdateStudent",compact("student"));
+    }
+
+
+    function putEditStudent($id, Request $req){
+        $student = Student::findOrFail($id);
+        $student->name = $req->name;
+        $student->reg = $req->reg;
+        $student->email = $req->email;
+        $student->password = $req->password;
+        $student->save();
+
+        return redirect()->back();
+
+
+    }
 
 }

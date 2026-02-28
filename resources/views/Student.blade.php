@@ -66,16 +66,48 @@
     th, td {
         text-align: center;
     }
+
+    .editBtn {
+        border: none;
+        background-color: rgb(11, 107, 252);
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .deleteBtn {
+         border: none;
+        background-color: rgb(255, 81, 0);
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        border-radius: 12px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* .sucessDiv {
+        background-color: rgba(8, 235, 8, 0.363);
+        color: green;
+        padding: 0.5em;
+        width: 100%;
+    } */
 </style>
 
 </head>
 <body>
-    @if (session("success"))
-            <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
-                {{ session("success") }}
-            </div>
+    {{-- @if (session("success"))
+        <div class="sucessDiv">
+            <p>{{ session("success") }}</p>
+        </div>
+    @endif --}}
 
-       @endif
+
     <div class="main">
        <table>
             <tr>
@@ -92,16 +124,18 @@
                     <td>{{ $student->reg }}</td>
                     <td>{{ $student->email }}</td>
                     <td>
-                        <form action="/updateStudent/{{ $student->id }}" method="GET">
-                            @csrf
-                            <button>Edit</button>
-                        </form>
+                       <form action="/editStudent/{{ $student->id }}" method="GET">
+                        @csrf
+                        <button class="editBtn">Edit</button>
+                       </form>
                     </td>
+
+
                     <td>
                         <form action="/deleteStudent/{{ $student->id }}" method="POST">
                             @csrf
                             @method("DELETE")
-                            <button>Delete</button>
+                            <button class="deleteBtn">Delete</button>
                         </form>
                     </td>
                 </tr>
